@@ -6,4 +6,4 @@ class Command(BaseCommand):
     help = 'Загружает данные из фикстуры'
 
     def handle(self, *args, **options):
-        call_command('loaddata', 'products.json')
+        call_command('loaddata', 'fixture/products.json')
