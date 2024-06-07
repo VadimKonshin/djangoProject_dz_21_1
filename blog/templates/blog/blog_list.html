@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+    <div class="row text-center">
+        <div class="col-12">
+
+
+            <a class="btn btn-primary" role="button"
+               href="{% url 'blog:create' %}">Создать блог</a>
+        </div>
+        {% for product in object_list %}
+            <div class="col-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        {% if product.imagery %}
+                            <img src="{{ product.photo | media_filter }}">
+                        {% endif %}
+                        <h4 class="my-2 font-weight-normal">Название блога {{ product.title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="my-2 font-weight-normal"> Краткое описание {{ product.content | truncatechars:100}}</h4>
+                        <a class="btn btn-primary" role="button"
+                           href="{% url 'blog:view' product.pk %}">Посмотреть</a>
+                        <a class="btn btn-primary" role="button"
+                           href="{% url 'blog:update' product.pk %}">Редактировать</a>
+                        <a class="btn btn-primary" role="button"
+                           href="{% url 'blog:delete' product.pk %}">Удалить</a>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

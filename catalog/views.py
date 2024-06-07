@@ -6,7 +6,7 @@ from catalog.models import Product
 
 
 def home(request):
-    return render(request, template_name='home.html')
+    return render(request, template_name='catalog/home.html')
 
 
 def contacts(request):
@@ -15,7 +15,7 @@ def contacts(request):
         phone = request.POST.get('phone')
         message = request.POST.get('message')
         print(f'{name} {phone} {message}')
-    return render(request, template_name='contacts.html')
+    return render(request, template_name='catalog/contacts.html')
 
 
 class ProductListView(ListView):
@@ -24,6 +24,12 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.view_counter += 1
+        self.object.save()
+        return self.object
 
 
 class ProductCreateView(CreateView):
