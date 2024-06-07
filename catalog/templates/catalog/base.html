@@ -171,7 +171,7 @@
 
 
 <header data-bs-theme="dark">
-    {% include 'includes/inc_menu.html' %}
+    {% include 'catalog/includes/inc_menu.html' %}
 </header>
 
 <main>
@@ -180,11 +180,14 @@
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Каталог товаров</h1>
+                <p>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить товар</a>
+                </p>
             </div>
         </div>
     </section>
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 </main>
 
 <footer class="text-body-secondary py-5">
@@ -193,7 +196,7 @@
             <a href="#">Back to top</a>
         </p>
         <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+        <p class="mb-0">New to Bootstrap? <a href="/static">Visit the homepage</a> or read our <a
                 href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
     </div>
 </footer>

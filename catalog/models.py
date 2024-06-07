@@ -27,6 +27,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    view_counter = models.PositiveIntegerField(verbose_name='Просмотры', default=0, **NULLABLE)
     # manufactured_at = models.DateField(auto_now=True, verbose_name='')
     # t_ext = models.TextField(verbose_name="Описание категории", help_text="Введите описание категории",
     #                                **NULLABLE)
