@@ -28,6 +28,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_counter = models.PositiveIntegerField(verbose_name='Просмотры', default=0, **NULLABLE)
+
     # manufactured_at = models.DateField(auto_now=True, verbose_name='')
     # t_ext = models.TextField(verbose_name="Описание категории", help_text="Введите описание категории",
     #                                **NULLABLE)
@@ -39,3 +40,17 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='продукт')
+    version_num = models.IntegerField(default=0, verbose_name='номер версии')
+    version_name = models.CharField(max_length=150, verbose_name='название версии')
+    is_active = models.BooleanField(default=True, verbose_name='активно')
+
+    def __str__(self):
+        return f'{self.is_active}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
