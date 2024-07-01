@@ -4,7 +4,7 @@ from django.forms import ModelForm, forms, BooleanField, BaseInlineFormSet
 from catalog.models import Product, Version
 
 
-class StyleFormMixim:
+class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fild_name, fild in self.fields.items():
@@ -14,7 +14,7 @@ class StyleFormMixim:
                 fild.widget.attrs['class'] = 'form-control'
 
 
-class ProductForm(StyleFormMixim, ModelForm):
+class ProductForm(StyleFormMixin, ModelForm):
     forbidden_words = ['казино',
                        'криптовалюта',
                        'крипта',
@@ -43,7 +43,7 @@ class ProductForm(StyleFormMixim, ModelForm):
         return description
 
 
-class VersionForm(StyleFormMixim, ModelForm):
+class VersionForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
