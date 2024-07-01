@@ -28,7 +28,7 @@ class ProductForm(StyleFormMixim, ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
-        exclude = ('view_counter',)
+        exclude = ('view_counter', 'owner')
 
     def clean_name(self):
         name = self.cleaned_data['name'].lower()
@@ -47,4 +47,3 @@ class VersionForm(StyleFormMixim, ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
-

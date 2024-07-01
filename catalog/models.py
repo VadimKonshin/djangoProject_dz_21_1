@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 NULLABLE = {"blank": True, "null": True}
 
 
@@ -28,6 +30,8 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_counter = models.PositiveIntegerField(verbose_name='Просмотры', default=0, **NULLABLE)
+
+    owner = models.ForeignKey(User, verbose_name='владелец', **NULLABLE, on_delete=models.SET_NULL)
 
     # manufactured_at = models.DateField(auto_now=True, verbose_name='')
     # t_ext = models.TextField(verbose_name="Описание категории", help_text="Введите описание категории",
