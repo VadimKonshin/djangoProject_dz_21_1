@@ -32,7 +32,7 @@ class Product(models.Model):
     view_counter = models.PositiveIntegerField(verbose_name='Просмотры', default=0, **NULLABLE)
 
     owner = models.ForeignKey(User, verbose_name='владелец', **NULLABLE, on_delete=models.SET_NULL)
-
+    is_published = models.BooleanField(default=False, verbose_name='публикация')
     # manufactured_at = models.DateField(auto_now=True, verbose_name='')
     # t_ext = models.TextField(verbose_name="Описание категории", help_text="Введите описание категории",
     #                                **NULLABLE)
@@ -41,6 +41,12 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "price"]
+
+        permissions = (
+            ('set_published', 'Can cancel publication of a product'),
+            ('change_description', 'Can change description'),
+            ('change_category', 'Can change category')
+        )
 
     def __str__(self):
         return f"{self.name}"
