@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
+from catalog.services import get_products_from_cache
 
 
 def home(request):
@@ -34,6 +35,10 @@ class ProductDetailView(DetailView):
         self.object.view_counter += 1
         self.object.save()
         return self.object
+
+    def get_queryset(self):
+        queryset = get_products_from_cache()
+        return queryset
 
 
 class ProductCreateView(CreateView, LoginRequiredMixin):
